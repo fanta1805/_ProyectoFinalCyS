@@ -43,10 +43,20 @@ namespace BE_ProyectoFinal.Controllers
         /*Verifica que el email y la contrasena pasada por parametro sean validas*/
         public async Task<IActionResult> Post([FromBody] AutenticacionDTO user)
         {
-            var userA = _context.Usuarios.AnyAsync(u => u.email == user.email && u.contrasena == user.contrasena);
-            return Ok(userA);
+            // Espera a que se resuelva la tarea de AnyAsync
+            bool userA = await _context.Usuarios.AnyAsync(u => u.email == user.email && u.contrasena == user.contrasena);
 
+            if (userA)
+            {
+                return Ok(userA);
+            }
+            else {
+                return BadRequest(new { message = "No se encontro el usuario" });
+            }
+
+            // Retorna el resultado como una respuesta Ok
         }
+
 
 
 
