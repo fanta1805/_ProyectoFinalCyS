@@ -15,26 +15,6 @@ namespace BE_ProyectoFinal.Controllers
             _context = context;
         }
 
-        // GET: UsuarioController
-        /*public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: UsuarioController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: UsuarioController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-        */
-        // POST: UsuarioController/Create
-        //[ValidateAntiForgeryToken]
         /*En este metodo lo que hacemos es registrar al usuario a la base de datos y verificar que no este*/
         [HttpPost("registro")]
         public async Task<IActionResult> Post([FromBody] RegistroDTO registroUser)

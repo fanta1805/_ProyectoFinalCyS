@@ -3,36 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|c:\\users\\santi\\downloads\\_proyectofinalcys\\be-proyectofinal\\be-proyectofinal\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|solutionrelative:be-proyectofinal\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|c:\\users\\santi\\downloads\\_proyectofinalcys\\be-proyectofinal\\be-proyectofinal\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|solutionrelative:be-proyectofinal\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|c:\\users\\santi\\downloads\\_proyectofinalcys\\be-proyectofinal\\be-proyectofinal\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|solutionrelative:be-proyectofinal\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|c:\\users\\santi\\downloads\\_proyectofinalcys\\be-proyectofinal\\be-proyectofinal\\model\\usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|solutionrelative:be-proyectofinal\\model\\usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|c:\\users\\santi\\downloads\\_proyectofinalcys\\be-proyectofinal\\be-proyectofinal\\aplicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|solutionrelative:be-proyectofinal\\aplicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|c:\\users\\santi\\downloads\\_proyectofinalcys\\be-proyectofinal\\be-proyectofinal\\model\\autenticaciondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|solutionrelative:be-proyectofinal\\model\\autenticaciondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|c:\\users\\santi\\downloads\\_proyectofinalcys\\be-proyectofinal\\be-proyectofinal\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|solutionrelative:be-proyectofinal\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|c:\\users\\santi\\downloads\\_proyectofinalcys\\be-proyectofinal\\be-proyectofinal\\model\\registrodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|solutionrelative:be-proyectofinal\\model\\registrodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|c:\\users\\santi\\downloads\\_proyectofinalcys\\be-proyectofinal\\be-proyectofinal\\model\\autenticaciondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|solutionrelative:be-proyectofinal\\model\\autenticaciondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|c:\\users\\santi\\downloads\\_proyectofinalcys\\be-proyectofinal\\be-proyectofinal\\migrations\\20240917133801_v1.0.1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|solutionrelative:be-proyectofinal\\migrations\\20240917133801_v1.0.1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|c:\\users\\santi\\downloads\\_proyectofinalcys\\be-proyectofinal\\be-proyectofinal\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|solutionrelative:be-proyectofinal\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|c:\\users\\santi\\downloads\\_proyectofinalcys\\be-proyectofinal\\be-proyectofinal\\aplicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|solutionrelative:be-proyectofinal\\aplicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|c:\\users\\santi\\downloads\\_proyectofinalcys\\be-proyectofinal\\be-proyectofinal\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|solutionrelative:be-proyectofinal\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|c:\\users\\santi\\downloads\\_proyectofinalcys\\be-proyectofinal\\be-proyectofinal\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{92AF0F53-982E-4BED-8563-31C5402C10CF}|BE-ProyectoFinal\\BE-ProyectoFinal.csproj|solutionrelative:be-proyectofinal\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,11 +46,99 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Program.cs",
+              "RelativeDocumentMoniker": "BE-ProyectoFinal\\Program.cs",
+              "ToolTip": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Program.cs",
+              "RelativeToolTip": "BE-ProyectoFinal\\Program.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAABkAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T00:47:49.792Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AutenticacionDTO.cs",
+              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Model\\AutenticacionDTO.cs",
+              "RelativeDocumentMoniker": "BE-ProyectoFinal\\Model\\AutenticacionDTO.cs",
+              "ToolTip": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Model\\AutenticacionDTO.cs",
+              "RelativeToolTip": "BE-ProyectoFinal\\Model\\AutenticacionDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-17T13:48:22.106Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "StartUp.cs",
+              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\StartUp.cs",
+              "RelativeDocumentMoniker": "BE-ProyectoFinal\\StartUp.cs",
+              "ToolTip": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\StartUp.cs",
+              "RelativeToolTip": "BE-ProyectoFinal\\StartUp.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwCsAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-17T12:19:23.345Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "20240917133801_v1.0.1.cs",
+              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Migrations\\20240917133801_v1.0.1.cs",
+              "RelativeDocumentMoniker": "BE-ProyectoFinal\\Migrations\\20240917133801_v1.0.1.cs",
+              "ToolTip": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Migrations\\20240917133801_v1.0.1.cs",
+              "RelativeToolTip": "BE-ProyectoFinal\\Migrations\\20240917133801_v1.0.1.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-17T13:38:02.121Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Usuarios.cs",
+              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Model\\Usuarios.cs",
+              "RelativeDocumentMoniker": "BE-ProyectoFinal\\Model\\Usuarios.cs",
+              "ToolTip": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Model\\Usuarios.cs",
+              "RelativeToolTip": "BE-ProyectoFinal\\Model\\Usuarios.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAkwBwAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-17T13:01:35.132Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UsuarioController.cs",
+              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Controllers\\UsuarioController.cs",
+              "RelativeDocumentMoniker": "BE-ProyectoFinal\\Controllers\\UsuarioController.cs",
+              "ToolTip": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Controllers\\UsuarioController.cs",
+              "RelativeToolTip": "BE-ProyectoFinal\\Controllers\\UsuarioController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB8AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-17T12:46:28.11Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\AplicationDbContext.cs",
+              "RelativeDocumentMoniker": "BE-ProyectoFinal\\AplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\AplicationDbContext.cs",
+              "RelativeToolTip": "BE-ProyectoFinal\\AplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-17T14:35:45.644Z"
             },
             {
               "$type": "Document",
@@ -62,68 +154,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AutenticacionDTO.cs",
-              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Model\\AutenticacionDTO.cs",
-              "RelativeDocumentMoniker": "BE-ProyectoFinal\\Model\\AutenticacionDTO.cs",
-              "ToolTip": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Model\\AutenticacionDTO.cs",
-              "RelativeToolTip": "BE-ProyectoFinal\\Model\\AutenticacionDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T13:48:22.106Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "20240917133801_v1.0.1.cs",
-              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Migrations\\20240917133801_v1.0.1.cs",
-              "RelativeDocumentMoniker": "BE-ProyectoFinal\\Migrations\\20240917133801_v1.0.1.cs",
-              "ToolTip": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Migrations\\20240917133801_v1.0.1.cs",
-              "RelativeToolTip": "BE-ProyectoFinal\\Migrations\\20240917133801_v1.0.1.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T13:38:02.121Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Usuarios.cs",
-              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Model\\Usuarios.cs",
-              "RelativeDocumentMoniker": "BE-ProyectoFinal\\Model\\Usuarios.cs",
-              "ToolTip": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Model\\Usuarios.cs",
-              "RelativeToolTip": "BE-ProyectoFinal\\Model\\Usuarios.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAswBwAAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T13:01:35.132Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UsuarioController.cs",
-              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Controllers\\UsuarioController.cs",
-              "RelativeDocumentMoniker": "BE-ProyectoFinal\\Controllers\\UsuarioController.cs",
-              "ToolTip": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\Controllers\\UsuarioController.cs",
-              "RelativeToolTip": "BE-ProyectoFinal\\Controllers\\UsuarioController.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAC4AAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T12:46:28.11Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\AplicationDbContext.cs",
-              "RelativeDocumentMoniker": "BE-ProyectoFinal\\AplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\AplicationDbContext.cs",
-              "RelativeToolTip": "BE-ProyectoFinal\\AplicationDbContext.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T14:35:45.644Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\appsettings.json",
               "RelativeDocumentMoniker": "BE-ProyectoFinal\\appsettings.json",
@@ -132,18 +163,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-09-17T12:19:45.125Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "StartUp.cs",
-              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\StartUp.cs",
-              "RelativeDocumentMoniker": "BE-ProyectoFinal\\StartUp.cs",
-              "ToolTip": "C:\\Users\\santi\\Downloads\\_ProyectoFinalCyS\\BE-ProyectoFinal\\BE-ProyectoFinal\\StartUp.cs",
-              "RelativeToolTip": "BE-ProyectoFinal\\StartUp.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwBgAAABZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T12:19:23.345Z"
             }
           ]
         }
