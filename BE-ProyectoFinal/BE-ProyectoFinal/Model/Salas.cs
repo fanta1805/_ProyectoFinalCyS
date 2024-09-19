@@ -13,8 +13,7 @@ namespace BE_ProyectoFinal.Model
         [Required]
         public string Ubicacion { get; set; }
 
-        [Required]
-        public DateTime Horario { get; set; }
+        public ICollection<Horario> Horarios { get; set; }
 
         // Navegación a Reservas
         public ICollection<Reservas> Reservas { get; set; }

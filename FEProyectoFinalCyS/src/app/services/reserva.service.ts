@@ -6,7 +6,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ReservaService {
   private myAppUrl = 'https://localhost:44345/';
-  private myApiUrl = 'api/reserva/modificar'
+  private myApiUrl = 'api/reserva/usuario/modificar'
 
   constructor(private http: HttpClient) {}
 
