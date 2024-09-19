@@ -17,7 +17,7 @@ namespace BE_ProyectoFinal.Controllers
         }
 
         // POST: ReservaController/Create
-        [HttpGet]
+        [HttpGet("listaReservas")]
         public async Task<IActionResult> Get()
         {
             try
@@ -38,8 +38,8 @@ namespace BE_ProyectoFinal.Controllers
         }
 
         // POST: ReservaController/Edit/5
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Reservas nuevaReserva)
+        [HttpPost("reservar")]
+        public async Task<IActionResult> Post([FromBody] ReservaDTO nuevaReserva)
         {
             try
             {
@@ -54,6 +54,12 @@ namespace BE_ProyectoFinal.Controllers
                     {
                         if (nuevaReserva.Prioridad > reserva.Prioridad)
                         {
+                            foreach (var hora in reserva.Sala.Horarios) {
+                                if (hora.Equals(reserva.HoraInicio) || hora.Equals(reserva.HoraFin)) { 
+                                    reserva.Sala.Horarios.Remove(hora);
+                                }
+                            }
+                            reserva.Sala.Horarios.Add(new Horario(nuevaReserva.HoraInicio, nuevaReserva.HoraFin, nuevaReserva.SalaId));
                             _context.Reservas.Remove(reserva);
                             await _context.SaveChangesAsync();
                         }
@@ -64,7 +70,9 @@ namespace BE_ProyectoFinal.Controllers
                     }
                 }
 
-                _context.Reservas.Add(nuevaReserva);
+                Reservas crearReserva = new Reservas(nuevaReserva.SalaId, nuevaReserva.UsuarioId, nuevaReserva.HoraInicio, nuevaReserva.HoraFin, nuevaReserva.Prioridad);
+
+                _context.Reservas.Add(crearReserva);
                 await _context.SaveChangesAsync();
                 return Ok("Reserva creada con éxito.");
             }
@@ -82,7 +90,7 @@ namespace BE_ProyectoFinal.Controllers
         }
 
         // POST: ReservaController/Delete/5
-        [HttpPut("{id}")]
+        /*[HttpPut("{id}")]
         public async Task<IActionResult> ActualizarReserva(int id, [FromBody] Reserva reserva)
         {
             // Actualizar reserva existente
@@ -94,6 +102,6 @@ namespace BE_ProyectoFinal.Controllers
         {
             // Eliminar reserva
             // Devolver respuesta
-        }
+        }*/
     }
 }

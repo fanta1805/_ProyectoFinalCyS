@@ -9,5 +9,14 @@
         // Relación con la sala
         public int SalaId { get; set; }
         public Salas Sala { get; set; }
+
+        public Horario(DateTime inicio, DateTime Fin, int salaId) { 
+            this.Inicio = inicio;
+            this.Fin = Fin;
+            this.SalaId = salaId;
+        }
     }
+
+
+
 }

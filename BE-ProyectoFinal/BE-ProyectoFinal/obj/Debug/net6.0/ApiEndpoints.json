@@ -1,5 +1,147 @@
 [
   {
+    "ContainingType": "BE_ProyectoFinal.Controllers.ReservaController",
+    "Method": "Edit",
+    "RelativePath": "api/reserva/usuario",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_ProyectoFinal.Controllers.ReservaController",
+    "Method": "Delete",
+    "RelativePath": "api/reserva/usuario",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_ProyectoFinal.Controllers.ReservaController",
+    "Method": "Get",
+    "RelativePath": "api/reserva/usuario/listaReservas",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_ProyectoFinal.Controllers.ReservaController",
+    "Method": "Post",
+    "RelativePath": "api/reserva/usuario/reservar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nuevaReserva",
+        "Type": "BE_ProyectoFinal.Model.ReservaDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_ProyectoFinal.Controllers.SalaController",
+    "Method": "Index",
+    "RelativePath": "api/salas",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_ProyectoFinal.Controllers.SalaController",
+    "Method": "Details",
+    "RelativePath": "api/salas",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_ProyectoFinal.Controllers.SalaController",
+    "Method": "Create",
+    "RelativePath": "api/salas",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_ProyectoFinal.Controllers.SalaController",
+    "Method": "Edit",
+    "RelativePath": "api/salas",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_ProyectoFinal.Controllers.SalaController",
+    "Method": "Delete",
+    "RelativePath": "api/salas",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_ProyectoFinal.Controllers.SalaController",
+    "Method": "Post",
+    "RelativePath": "api/salas/agregar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sala",
+        "Type": "BE_ProyectoFinal.Model.Salas",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BE_ProyectoFinal.Controllers.UsuarioController",
     "Method": "Edit",
     "RelativePath": "api/usuario",

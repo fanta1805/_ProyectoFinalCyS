@@ -15,7 +15,13 @@ namespace BE_ProyectoFinal.Model
 
         public ICollection<Horario> Horarios { get; set; }
 
-        // Navegación a Reservas
-        public ICollection<Reservas> Reservas { get; set; }
+
+        public Salas(string nombreSala, string ubicacion)
+        {
+            this.NombreSala = nombreSala;
+            this.Ubicacion = ubicacion;
+            this.Horarios = new List<Horario>();
+        }
     }
+
 }

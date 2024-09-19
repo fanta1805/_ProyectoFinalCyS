@@ -28,6 +28,23 @@ namespace BE_ProyectoFinal.Model
 
         [Required]
         public int Prioridad { get; set; }
+
+  
+        public Reservas(int salaId, int usuarioId, DateTime horaInicio, DateTime horaFin, int prioridad)
+        {
+            SalaId = salaId;
+            UsuarioId = usuarioId;
+            HoraInicio = horaInicio;
+            HoraFin = horaFin;
+            Prioridad = prioridad;
+        }
+
+        // Constructor sin parámetros (necesario para Entity Framework)
+        public Reservas()
+        {
+        }
+
+
     }
 
 

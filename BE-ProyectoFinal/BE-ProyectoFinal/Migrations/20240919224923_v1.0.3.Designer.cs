@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BE_ProyectoFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240917133801_v1.0.1")]
-    partial class v101
+    [Migration("20240919224923_v1.0.3")]
+    partial class v103
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,30 @@ namespace BE_ProyectoFinal.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("BE_ProyectoFinal.Model.Horario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Fin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Inicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SalaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SalaId");
+
+                    b.ToTable("Horario");
+                });
 
             modelBuilder.Entity("BE_ProyectoFinal.Model.Reservas", b =>
                 {
@@ -63,9 +87,6 @@ namespace BE_ProyectoFinal.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdSala"));
-
-                    b.Property<DateTime>("Horario")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("NombreSala")
                         .IsRequired()
@@ -109,10 +130,21 @@ namespace BE_ProyectoFinal.Migrations
                     b.ToTable("Usuarios");
                 });
 
+            modelBuilder.Entity("BE_ProyectoFinal.Model.Horario", b =>
+                {
+                    b.HasOne("BE_ProyectoFinal.Model.Salas", "Sala")
+                        .WithMany("Horarios")
+                        .HasForeignKey("SalaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sala");
+                });
+
             modelBuilder.Entity("BE_ProyectoFinal.Model.Reservas", b =>
                 {
                     b.HasOne("BE_ProyectoFinal.Model.Salas", "Sala")
-                        .WithMany("Reservas")
+                        .WithMany()
                         .HasForeignKey("SalaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -130,7 +162,7 @@ namespace BE_ProyectoFinal.Migrations
 
             modelBuilder.Entity("BE_ProyectoFinal.Model.Salas", b =>
                 {
-                    b.Navigation("Reservas");
+                    b.Navigation("Horarios");
                 });
 
             modelBuilder.Entity("BE_ProyectoFinal.Model.Usuarios", b =>

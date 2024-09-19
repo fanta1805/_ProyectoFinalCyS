@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BE_ProyectoFinal.Migrations
 {
     /// <inheritdoc />
-    public partial class v101 : Migration
+    public partial class v103 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,8 +18,7 @@ namespace BE_ProyectoFinal.Migrations
                     IdSala = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NombreSala = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Ubicacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Horario = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Ubicacion = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,6 +39,27 @@ namespace BE_ProyectoFinal.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Horario",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Inicio = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Fin = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SalaId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Horario", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Horario_Salas_SalaId",
+                        column: x => x.SalaId,
+                        principalTable: "Salas",
+                        principalColumn: "IdSala",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,6 +92,11 @@ namespace BE_ProyectoFinal.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Horario_SalaId",
+                table: "Horario",
+                column: "SalaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reservas_SalaId",
                 table: "Reservas",
                 column: "SalaId");
@@ -85,6 +110,9 @@ namespace BE_ProyectoFinal.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Horario");
+
             migrationBuilder.DropTable(
                 name: "Reservas");
 
