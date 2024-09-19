@@ -8,7 +8,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Usuarios> Usuarios { get; set; }
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    /*protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Configuración explícita para Reservas
         modelBuilder.Entity<Reservas>()
@@ -16,14 +16,13 @@ public class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<Reservas>()
             .HasOne(r => r.Sala)
-            .WithMany(s => s.Reservas)
             .HasForeignKey(r => r.SalaId);
 
         modelBuilder.Entity<Reservas>()
             .HasOne(r => r.Usuario)
             .WithMany(u => u.Reservas)
             .HasForeignKey(r => r.UsuarioId);
-    }
+    }*/
 
 
 }
