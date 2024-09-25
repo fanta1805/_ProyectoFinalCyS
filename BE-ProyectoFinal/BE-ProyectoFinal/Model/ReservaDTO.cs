@@ -7,5 +7,6 @@
         public DateTime HoraInicio { get; set; }
         public DateTime HoraFin { get; set; }
         public int Prioridad { get; set; }
+        public int capacidad{ get; set; }
     }
 }

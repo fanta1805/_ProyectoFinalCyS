@@ -25,16 +25,10 @@ namespace BE_ProyectoFinal.Controllers
                 var listaReservas = await _context.Reservas.ToListAsync();
                 return Ok(listaReservas);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-        }
-
-        // GET: ReservaController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
         }
 
         // POST: ReservaController/Edit/5
@@ -43,6 +37,29 @@ namespace BE_ProyectoFinal.Controllers
         {
             try
             {
+                var sala = await _context.Salas.FindAsync(nuevaReserva.SalaId);
+                var usuario = await _context.Usuarios.FindAsync(nuevaReserva.UsuarioId);
+
+                if (sala == null)
+                {
+                    return NotFound("La sala especificada no existe.");
+                }
+
+                if (usuario == null)
+                {
+                    return NotFound("El usuario especificado no existe.");
+                }
+
+                var capacidadSala = await _context.Salas
+                    .Where(r => r.IdSala == nuevaReserva.SalaId)
+                    .Select(r => r.capacidad)
+                    .FirstOrDefaultAsync();
+
+                if (nuevaReserva.capacidad > capacidadSala)
+                {
+                    return BadRequest(new { message = "La capacidad solicitada excede la capacidad de la sala." });
+                }
+
                 var reservasExistentes = await _context.Reservas
                     .Where(r => r.SalaId == nuevaReserva.SalaId &&
                                 r.HoraInicio.Date == nuevaReserva.HoraInicio.Date)
@@ -50,18 +67,15 @@ namespace BE_ProyectoFinal.Controllers
 
                 foreach (var reserva in reservasExistentes)
                 {
-                    if (!(nuevaReserva.HoraFin < reserva.HoraInicio || nuevaReserva.HoraInicio > reserva.HoraFin))
+                    bool hayInterseccion = !(nuevaReserva.HoraFin <= reserva.HoraInicio || nuevaReserva.HoraInicio >= reserva.HoraFin);
+
+                    if (hayInterseccion)
                     {
                         if (nuevaReserva.Prioridad > reserva.Prioridad)
                         {
-                            foreach (var hora in reserva.Sala.Horarios) {
-                                if (hora.Equals(reserva.HoraInicio) || hora.Equals(reserva.HoraFin)) { 
-                                    reserva.Sala.Horarios.Remove(hora);
-                                }
-                            }
-                            reserva.Sala.Horarios.Add(new Horario(nuevaReserva.HoraInicio, nuevaReserva.HoraFin, nuevaReserva.SalaId));
                             _context.Reservas.Remove(reserva);
                             await _context.SaveChangesAsync();
+                            break;
                         }
                         else
                         {
@@ -70,38 +84,84 @@ namespace BE_ProyectoFinal.Controllers
                     }
                 }
 
-                Reservas crearReserva = new Reservas(nuevaReserva.SalaId, nuevaReserva.UsuarioId, nuevaReserva.HoraInicio, nuevaReserva.HoraFin, nuevaReserva.Prioridad);
+                Reservas crearReserva = new Reservas(
+                    nuevaReserva.SalaId,
+                    nuevaReserva.UsuarioId,
+                    nuevaReserva.HoraInicio,
+                    nuevaReserva.HoraFin,
+                    nuevaReserva.Prioridad
+                );
 
                 _context.Reservas.Add(crearReserva);
                 await _context.SaveChangesAsync();
-                return Ok("Reserva creada con éxito.");
+
+                // Devuelve un objeto JSON en lugar de texto plano
+                return Ok(new { message = "Reserva creada con éxito." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = $"Error: {ex.Message}" });
+            }
+        }
+
+
+
+
+
+
+
+
+
+        [HttpPut("actualizar/{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] ReservaDTO reservaActualizada)
+        {
+            try
+            {
+
+                var reservaExistente = await _context.Reservas.FirstOrDefaultAsync(r => r.IdReserva == id);
+
+                if (reservaExistente == null) {
+                    return BadRequest(new { message = "No encontro la reserva" });
+                }
+
+                reservaExistente.SalaId = reservaActualizada.SalaId;
+                reservaExistente.UsuarioId = reservaActualizada.UsuarioId;
+                reservaExistente.HoraInicio = reservaActualizada.HoraInicio;
+                reservaExistente.HoraFin = reservaActualizada.HoraFin;
+                reservaExistente.Prioridad = reservaActualizada.Prioridad;
+
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "La reserva fue actualizada" });
+
+            }
+            catch (Exception ex) {
+
+                return BadRequest(ex.Message);
+
+            }
+        }
+
+        [HttpDelete("eliminar/{id}")]
+        public async Task<IActionResult> EliminarReserva(int id)
+        {
+            try
+            {
+                var reserva = await _context.Reservas.FindAsync(id);
+                if (reserva == null)
+                {
+                    return NotFound(new { message = "Reserva no encontrada" });
+                }
+
+                _context.Reservas.Remove(reserva);
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Reserva eliminada correctamente" });
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-
         }
 
-        // GET: ReservaController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: ReservaController/Delete/5
-        /*[HttpPut("{id}")]
-        public async Task<IActionResult> ActualizarReserva(int id, [FromBody] Reserva reserva)
-        {
-            // Actualizar reserva existente
-            // Devolver respuesta
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> EliminarReserva(int id)
-        {
-            // Eliminar reserva
-            // Devolver respuesta
-        }*/
     }
 }

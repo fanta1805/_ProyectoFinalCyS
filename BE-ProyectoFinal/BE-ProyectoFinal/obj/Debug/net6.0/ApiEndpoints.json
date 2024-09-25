@@ -1,32 +1,37 @@
 [
   {
     "ContainingType": "BE_ProyectoFinal.Controllers.ReservaController",
-    "Method": "Edit",
-    "RelativePath": "api/reserva/usuario",
-    "HttpMethod": "",
+    "Method": "Put",
+    "RelativePath": "api/reserva/usuario/actualizar/{id}",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
+      },
+      {
+        "Name": "reservaActualizada",
+        "Type": "BE_ProyectoFinal.Model.ReservaDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
     "ContainingType": "BE_ProyectoFinal.Controllers.ReservaController",
-    "Method": "Delete",
-    "RelativePath": "api/reserva/usuario",
-    "HttpMethod": "",
+    "Method": "EliminarReserva",
+    "RelativePath": "api/reserva/usuario/eliminar/{id}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -59,19 +64,9 @@
   },
   {
     "ContainingType": "BE_ProyectoFinal.Controllers.SalaController",
-    "Method": "Index",
-    "RelativePath": "api/salas",
-    "HttpMethod": "",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BE_ProyectoFinal.Controllers.SalaController",
-    "Method": "Details",
-    "RelativePath": "api/salas",
-    "HttpMethod": "",
+    "Method": "Put",
+    "RelativePath": "api/salas/actualizar",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -79,48 +74,11 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BE_ProyectoFinal.Controllers.SalaController",
-    "Method": "Create",
-    "RelativePath": "api/salas",
-    "HttpMethod": "",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BE_ProyectoFinal.Controllers.SalaController",
-    "Method": "Edit",
-    "RelativePath": "api/salas",
-    "HttpMethod": "",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
+      },
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BE_ProyectoFinal.Controllers.SalaController",
-    "Method": "Delete",
-    "RelativePath": "api/salas",
-    "HttpMethod": "",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
+        "Name": "reservaActualizada",
+        "Type": "BE_ProyectoFinal.Model.ReservaDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -135,10 +93,20 @@
     "Parameters": [
       {
         "Name": "sala",
-        "Type": "BE_ProyectoFinal.Model.Salas",
+        "Type": "BE_ProyectoFinal.Model.SalaDTO",
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BE_ProyectoFinal.Controllers.SalaController",
+    "Method": "Get",
+    "RelativePath": "api/salas/salasDisponibles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

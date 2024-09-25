@@ -1,1 +1,94 @@
-<p>home works!</p>
+<div class="container">
+  <div class="row">
+    <!-- Formulario de Reserva -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h4>Nueva Reserva</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="reservaForm" (ngSubmit)="realizarReserva()" id="reservaForm">
+            <div class="mb-3">
+              <label for="usuarioId" class="form-label">ID Usuario</label>
+              <input formControlName="UsuarioId" type="number" class="form-control" id="usuarioId" placeholder="Ingrese ID del Usuario" required>
+            </div>
+            <div class="mb-3">
+              <label for="salaId" class="form-label">ID Sala</label>
+              <input formControlName="SalaId" type="number" class="form-control" id="salaId" placeholder="Ingrese ID de la Sala" required>
+            </div>
+            <div class="mb-3">
+              <label for="horaInicio" class="form-label">Hora de Inicio</label>
+              <input formControlName="HoraInicio" type="datetime-local" class="form-control" id="horaInicio" required>
+            </div>
+            <div class="mb-3">
+              <label for="horaFin" class="form-label">Hora de Fin</label>
+              <input formControlName="HoraFin" type="datetime-local" class="form-control" id="horaFin" required>
+            </div>
+            <div class="mb-3">
+              <label for="prioridad" class="form-label">Prioridad</label>
+              <input formControlName="Prioridad" type="number" class="form-control" id="prioridad" placeholder="Ingrese Prioridad" required>
+            </div>
+            <div class="mb-3">
+              <label for="capacidad" class="form-label">Capacidad</label>
+              <input formControlName="capacidad" type="number" class="form-control" id="capacidad" placeholder="Ingrese Capacidad" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Reserva</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reservas Realizadas -->
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h4>Reservas Realizadas</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-group mb-4" id="reservasList">
+            <!-- Recorrer reservas realizadas -->
+            <li *ngFor="let reserva of listReservas" class="list-group-item">
+              <div class="row align-items-center">
+                <div class="col-md-2"><strong>ID Sala:</strong> {{ reserva.salaId }}</div>
+                <div class="col-md-2"><strong>ID Usuario:</strong> {{ reserva.usuarioId }}</div>
+                <div class="col-md-3"><strong>Inicio:</strong> {{ reserva.horaInicio | date:'short' }}</div>
+                <div class="col-md-3"><strong>Fin:</strong> {{ reserva.horaFin | date:'short' }}</div>
+                <div class="col-md-1"><strong>Prioridad:</strong> {{ reserva.prioridad }}</div>
+
+                <!-- Botones de Editar y Borrar -->
+                <div class="col-md-1 d-flex justify-content-end">
+                  <button class="btn btn-sm btn-warning me-1" style="width: 30px; height: 30px;">
+                    <i class="bi bi-pencil-square"></i>
+                  </button>
+                  <button class="btn btn-sm btn-danger" style="width: 30px; height: 30px;">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </li>
+
+            <!-- Mostrar mensaje si no hay reservas -->
+            <li *ngIf="listReservas.length === 0" class="list-group-item">No hay reservas aún.</li>
+          </ul>
+
+          <!-- Salas Disponibles -->
+          <h4>Salas Disponibles</h4>
+          <ul class="list-group" id="salasList">
+            <!-- Recorrer lista de salas disponibles -->
+            <li *ngFor="let sala of listSalas" class="list-group-item">
+              <div class="row">
+                <div class="col-md-3"><strong>ID Sala:</strong> {{ sala.idSala }}</div>
+                <div class="col-md-3"><strong>Nombre:</strong> {{ sala.nombreSala }}</div>
+                <div class="col-md-3"><strong>Ubicación:</strong> {{ sala.ubicacion }}</div>
+                <div class="col-md-3"><strong>Capacidad:</strong> {{ sala.capacidad }}</div>
+              </div>
+            </li>
+
+            <!-- Mostrar mensaje si no hay salas disponibles -->
+            <li *ngIf="listSalas.length === 0" class="list-group-item">No hay salas disponibles.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
