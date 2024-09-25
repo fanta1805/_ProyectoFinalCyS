@@ -1,1 +1,71 @@
-<p>home-user works!</p>
+<div class="container mt-5">
+  <div class="row">
+    <!-- Formulario de Reserva -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h4>Nueva Reserva</h4>
+        </div>
+        <div class="card-body">
+          <form id="reservaForm">
+            <div class="mb-3">
+              <label for="usuarioId" class="form-label">ID Usuario</label>
+              <input type="number" class="form-control" id="usuarioId" placeholder="Ingrese ID del Usuario">
+            </div>
+            <div class="mb-3">
+              <label for="salaId" class="form-label">ID Sala</label>
+              <input type="number" class="form-control" id="salaId" placeholder="Ingrese ID de la Sala">
+            </div>
+            <div class="mb-3">
+              <label for="horaInicio" class="form-label">Hora de Inicio</label>
+              <input type="datetime-local" class="form-control" id="horaInicio">
+            </div>
+            <div class="mb-3">
+              <label for="horaFin" class="form-label">Hora de Fin</label>
+              <input type="datetime-local" class="form-control" id="horaFin">
+            </div>
+            <div class="mb-3">
+              <label for="prioridad" class="form-label">Prioridad</label>
+              <input type="number" class="form-control" id="prioridad" placeholder="Ingrese Prioridad">
+            </div>
+            <div class="mb-3">
+              <label for="capacidad" class="form-label">Capacidad</label>
+              <input type="number" class="form-control" id="capacidad" placeholder="Ingrese Capacidad">
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Reserva</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reservas realizadas -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h4>Reservas Realizadas</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-group" id="reservasList">
+            <!-- Aquí se mostrarán las reservas realizadas -->
+            <li class="list-group-item">No hay reservas aún.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Salas disponibles -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h4>Salas Disponibles</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-group" id="salasList">
+            <!-- Aquí se mostrarán las salas disponibles -->
+            <li class="list-group-item">No hay salas disponibles.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -18,54 +18,72 @@ namespace BE_ProyectoFinal.Controllers
             _context = context;
         }
 
-        // POST: SalaController/Create
-        [HttpPost("agregar")]
-        public async Task<IActionResult> Post([FromBody] Salas sala)
+
+        [HttpGet("salasDisponibles")]
+        public async Task<IActionResult> Get()
         {
             try
             {
-                _context.Add(sala);
-                await _context.SaveChangesAsync();
-                return Ok(sala);
+                var listaSalas = await _context.Salas.ToListAsync();
+                return Ok(listaSalas);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-        // GET: SalaController
-        public ActionResult Index()
+        // POST: SalaController/Create
+        [HttpPost("agregar")]
+        public async Task<IActionResult> Post([FromBody] SalaDTO sala)
         {
-            return View();
+            try
+            {
+                Salas salaNueva = new Salas(sala.NombreSala, sala.Ubicacion, sala.capacidad);
+                _context.Add(salaNueva);
+                await _context.SaveChangesAsync();
+                return Ok(salaNueva);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        // GET: SalaController/Details/5
-        public ActionResult Details(int id)
+        [HttpPut("actualizar")]
+        public async Task<IActionResult> Put(int id, [FromBody] ReservaDTO reservaActualizada)
         {
-            return View();
+            try
+            {
+
+                var reservaExistente = await _context.Reservas.FirstOrDefaultAsync(r => r.IdReserva == id);
+
+                if (reservaExistente == null)
+                {
+                    return BadRequest(new { message = "No encontro la reserva" });
+                }
+
+                reservaExistente.SalaId = reservaActualizada.SalaId;
+                reservaExistente.UsuarioId = reservaActualizada.UsuarioId;
+                reservaExistente.HoraInicio = reservaActualizada.HoraInicio;
+                reservaExistente.HoraFin = reservaActualizada.HoraFin;
+                reservaExistente.Prioridad = reservaActualizada.Prioridad;
+
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "La reserva fue actualizada" });
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+
+            }
         }
 
-        // GET: SalaController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // GET: SalaController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
- 
-        // GET: SalaController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
         // POST: SalaController/Delete/5
-       
-        
+
+
     }
 }

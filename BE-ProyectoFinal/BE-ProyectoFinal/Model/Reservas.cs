@@ -32,16 +32,21 @@ namespace BE_ProyectoFinal.Model
   
         public Reservas(int salaId, int usuarioId, DateTime horaInicio, DateTime horaFin, int prioridad)
         {
-            SalaId = salaId;
-            UsuarioId = usuarioId;
-            HoraInicio = horaInicio;
-            HoraFin = horaFin;
-            Prioridad = prioridad;
+            this.SalaId = salaId;
+            this.UsuarioId = usuarioId;
+            this.HoraInicio = horaInicio;
+            this.HoraFin = horaFin;
+            this.Prioridad = prioridad;
+
         }
 
         // Constructor sin parámetros (necesario para Entity Framework)
         public Reservas()
         {
+        }
+
+        public ICollection<Horario> getHorarios() { 
+            return Sala.Horarios;
         }
 
 
