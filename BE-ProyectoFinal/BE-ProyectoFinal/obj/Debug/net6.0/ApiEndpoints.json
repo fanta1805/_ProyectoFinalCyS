@@ -55,8 +55,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "nuevaReserva",
-        "Type": "BE_ProyectoFinal.Model.ReservaDTO",
+        "Name": "nuevasReserva",
+        "Type": "System.Collections.Generic.List\u00601[[BE_ProyectoFinal.Model.ReservaDTO, BE-ProyectoFinal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": true
       }
     ],

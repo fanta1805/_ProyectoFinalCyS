@@ -17,6 +17,7 @@ import {ToastrService} from "ngx-toastr";
 export class HomeComponent {
   listReservas: any[] = [];
   listSalas: any[] = [];
+  reservasTemp: any[] = [];
 
   reservaForm: FormGroup
 
@@ -32,33 +33,37 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    this.obtenerReservas();// Llama a obtenerSalas al iniciar el componente
+    this.obtenerReservas();
     this.obtenerSalas();
   }
 
 
-  realizarReserva(){
-    const reserva: any = {
-      SalaId: this.reservaForm.get('SalaId')?.value,
-      UsuarioId: this.reservaForm.get('UsuarioId')?.value,
-      HoraInicio: new Date(this.reservaForm.get('HoraInicio')?.value).toISOString(),
-      HoraFin: new Date(this.reservaForm.get('HoraFin')?.value).toISOString(),
-      Prioridad: this.reservaForm.get('Prioridad')?.value,
-      capacidad: this.reservaForm.get('capacidad')?.value
-    };
+  isSending = false;
 
-    this._reservaService.postReservar(reserva).subscribe(
-      (response: any) => {
-        this.toastr.success(response.message, 'Éxito!');
-        this.obtenerReservas();
-        this.reservaForm.reset();
-      },
-      (error: any) => {
-        this.toastr.error('Opss.. Ha ocurrido un error al realizar la reserva', 'Error!');
-        console.log('Error en la reserva: ', error);
-      }
-    );
+  realizarReserva() {
+    if (this.reservasTemp.length > 0) {
+      this.isSending = true; // Deshabilita el botón
+      this._reservaService.postReservar(this.reservasTemp).subscribe(
+        (response: any) => {
+          this.toastr.success(response.message, 'Éxito!');
+          this.obtenerReservas();
+          this.reservasTemp = []; // Limpia la lista temporal después de enviar
+          this.isSending = false; // Habilita el botón
+        },
+        (error: any) => {
+          this.reservasTemp = []
+          this.toastr.error('Opss.. Ha ocurrido un error al enviar las reservas', 'Error!');
+          console.log('Error en el envío de reservas: ', error);
+          this.isSending = false; // Habilita el botón
+        }
+      );
+    } else {
+      this.toastr.warning('No hay reservas para enviar', 'Atención!');
+    }
   }
+
+
+
 
   obtenerReservas() {
     this._reservaService.getListaReservas().subscribe(data =>{
@@ -80,4 +85,23 @@ export class HomeComponent {
   }
 
 
+  anadirReserva() {
+    console.log("Añadir reserva llamado")
+    if (this.reservaForm.valid) {
+      const reserva: any = {
+        SalaId: this.reservaForm.get('SalaId')?.value,
+        UsuarioId: this.reservaForm.get('UsuarioId')?.value,
+        HoraInicio: new Date(this.reservaForm.get('HoraInicio')?.value).toISOString(),
+        HoraFin: new Date(this.reservaForm.get('HoraFin')?.value).toISOString(),
+        Prioridad: this.reservaForm.get('Prioridad')?.value,
+        capacidad: this.reservaForm.get('capacidad')?.value
+      };
+
+      this.reservasTemp.push(reserva);
+      this.toastr.success('Reserva añadida a la lista temporal', 'Éxito!');
+      this.reservaForm.reset();
+    } else {
+      this.toastr.error('Por favor, complete todos los campos requeridos.', 'Error!');
+    }
+  }
 }
