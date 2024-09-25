@@ -7,7 +7,7 @@
           <h4>Nueva Reserva</h4>
         </div>
         <div class="card-body">
-          <form [formGroup]="reservaForm" (ngSubmit)="realizarReserva()" id="reservaForm">
+          <form [formGroup]="reservaForm" id="reservaForm">
             <div class="mb-3">
               <label for="usuarioId" class="form-label">ID Usuario</label>
               <input formControlName="UsuarioId" type="number" class="form-control" id="usuarioId" placeholder="Ingrese ID del Usuario" required>
@@ -32,7 +32,10 @@
               <label for="capacidad" class="form-label">Capacidad</label>
               <input formControlName="capacidad" type="number" class="form-control" id="capacidad" placeholder="Ingrese Capacidad" required>
             </div>
-            <button type="submit" class="btn btn-primary">Guardar Reserva</button>
+            <div class="d-flex justify-content-between">
+              <button type="button" class="btn btn-secondary" (click)="anadirReserva()">Añadir Reserva</button>
+              <button (click)="realizarReserva()" [disabled]="isSending">Enviar Reservas</button>
+            </div>
           </form>
         </div>
       </div>

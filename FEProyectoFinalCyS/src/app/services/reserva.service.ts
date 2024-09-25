@@ -25,8 +25,8 @@ export class ReservaService {
     return this.http.get(this.myAppUrl + this.myApiUrlSalas);
   }
 
-  postReservar(reserva : any): Observable<any>{
-    return this.http.post(this.myAppUrl + this.myApiUrlReservar, reserva);
+  postReservar(reservas : any[]): Observable<any>{
+    return this.http.post(this.myAppUrl + this.myApiUrlReservar, reservas);
   }
 
 
