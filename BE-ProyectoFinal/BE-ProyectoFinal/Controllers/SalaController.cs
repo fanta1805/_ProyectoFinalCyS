@@ -62,7 +62,7 @@ namespace BE_ProyectoFinal.Controllers
                     return BadRequest(new { message = "No encontro la reserva" });
                 }
 
-                reservaExistente.SalaId = reservaActualizada.SalaId;
+
                 reservaExistente.UsuarioId = reservaActualizada.UsuarioId;
                 reservaExistente.HoraInicio = reservaActualizada.HoraInicio;
                 reservaExistente.HoraFin = reservaActualizada.HoraFin;

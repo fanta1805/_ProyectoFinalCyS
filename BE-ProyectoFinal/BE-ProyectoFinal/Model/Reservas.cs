@@ -28,15 +28,18 @@ namespace BE_ProyectoFinal.Model
 
         [Required]
         public int Prioridad { get; set; }
+        [Required]
+        public int capacidad { get; set; }
 
-  
-        public Reservas(int salaId, int usuarioId, DateTime horaInicio, DateTime horaFin, int prioridad)
+
+        public Reservas(int salaId, int usuarioId, DateTime horaInicio, DateTime horaFin, int prioridad, int capacidad)
         {
             this.SalaId = salaId;
             this.UsuarioId = usuarioId;
             this.HoraInicio = horaInicio;
             this.HoraFin = horaFin;
             this.Prioridad = prioridad;
+            this.capacidad = capacidad;
 
         }
 

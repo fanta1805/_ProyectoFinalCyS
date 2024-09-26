@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BE_ProyectoFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240920140720_NuevaMigracion")]
-    partial class NuevaMigracion
+    [Migration("20240926120554_v1.3.2")]
+    partial class v132
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,6 +71,9 @@ namespace BE_ProyectoFinal.Migrations
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
+                    b.Property<int>("capacidad")
+                        .HasColumnType("int");
+
                     b.HasKey("IdReserva");
 
                     b.HasIndex("SalaId");
@@ -92,9 +95,8 @@ namespace BE_ProyectoFinal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Ubicacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Ubicacion")
+                        .HasColumnType("int");
 
                     b.Property<int>("capacidad")
                         .HasColumnType("int");
@@ -127,6 +129,9 @@ namespace BE_ProyectoFinal.Migrations
                     b.Property<string>("email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("piso")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

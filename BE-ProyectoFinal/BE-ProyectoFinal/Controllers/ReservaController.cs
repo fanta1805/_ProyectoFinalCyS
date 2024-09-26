@@ -38,76 +38,117 @@ namespace BE_ProyectoFinal.Controllers
             try
             {
                 bool flag = false;
-                foreach (var resAgregado in nuevasReserva) {
+                foreach (var resAgregado in nuevasReserva)
+                {
                     foreach (var item in nuevasReserva)
                     {
-                        if (!(resAgregado.Equals(item))) {
+                        if (!(resAgregado.Equals(item)))
+                        {
                             if (!(resAgregado.HoraFin <= item.HoraInicio || resAgregado.HoraInicio >= item.HoraFin))
                             {
                                 flag = true;
                             }
                         }
-
                     }
-
                 }
+
                 if (flag)
                 {
                     return BadRequest("La nueva reserva se superpone con la reserva que se encuentra en tu lista temporal de reservas");
                 }
+
                 foreach (var res in nuevasReserva)
                 {
-
-                    var sala = await _context.Salas.FindAsync(res.SalaId);
                     var usuario = await _context.Usuarios.FindAsync(res.UsuarioId);
-                    if (sala == null)
-                    {
-                        return NotFound("La sala especificada no existe.");
-                    }
-
                     if (usuario == null)
                     {
                         return NotFound("El usuario especificado no existe.");
                     }
 
-                    var capacidadSala = await _context.Salas
-                        .Where(r => r.IdSala == res.SalaId)
-                        .Select(r => r.capacidad)
-                        .FirstOrDefaultAsync();
+                    var salas = await _context.Salas.ToListAsync();
+                    Salas salaMejor = null;
 
-                    if (res.capacidad > capacidadSala)
+                    foreach (var item in salas)
                     {
-                        return BadRequest(new { message = "La capacidad solicitada excede la capacidad de la sala." });
-                    }
+                        var capacidadSala = await _context.Salas
+                            .Where(r => r.IdSala == item.IdSala)
+                            .Select(r => r.capacidad)
+                            .FirstOrDefaultAsync();
 
-                    var reservasExistentes = await _context.Reservas
-                        .Where(r => r.SalaId == res.SalaId &&
-                                    r.HoraInicio.Date == res.HoraInicio.Date)
-                        .ToListAsync();
+                        var piso = await _context.Salas
+                            .Where(r => r.IdSala == item.IdSala)
+                            .Select(r => r.Ubicacion)
+                            .FirstOrDefaultAsync();
 
-                    foreach (var reserva in reservasExistentes)
-                    {
-                        bool hayInterseccion = !(res.HoraFin <= reserva.HoraInicio || res.HoraInicio >= reserva.HoraFin);
-
-                        if (hayInterseccion)
+                        if (res.capacidad > capacidadSala)
                         {
-                            if (res.Prioridad > reserva.Prioridad)
+                            continue;
+                        }
+
+                        if (salaMejor == null)
+                        {
+                            salaMejor = item;
+                        }
+                        else
+                        {
+                            if ((salaMejor.capacidad - res.capacidad) > (item.capacidad - res.capacidad))
                             {
-                                _context.Reservas.Remove(reserva);
-                                await _context.SaveChangesAsync();
-                                break;
-                            }
-                            else
-                            {
-                                return BadRequest("La nueva reserva se superpone con una reserva existente de igual o mayor prioridad.");
+                                if ((salaMejor.Ubicacion - usuario.piso) > (item.Ubicacion - usuario.piso))
+                                {
+                                    salaMejor = item;
+                                }
                             }
                         }
+
+                        var reservasExistentes = await _context.Reservas
+                            .Where(r => r.SalaId == salaMejor.IdSala &&
+                                        r.HoraInicio.Date == res.HoraInicio.Date)
+                            .ToListAsync();
+
+                        bool salaOcupada = false;
+
+                        foreach (var reserva in reservasExistentes)
+                        {
+                            bool hayInterseccion = !(res.HoraFin <= reserva.HoraInicio || res.HoraInicio >= reserva.HoraFin);
+
+                            if (hayInterseccion)
+                            {
+                                salaOcupada = true;
+
+                                if (res.Prioridad > reserva.Prioridad)
+                                {
+                  
+                                    _context.Reservas.Remove(reserva);
+                                    await _context.SaveChangesAsync();
+                                    salaOcupada = false; 
+                                    break;
+                                }
+
+                            }
+                        }
+
+                        if (salaOcupada)
+                        {
+                            salaMejor = null;  
+                            continue;
+                        }
+
+                        if (!salaOcupada)
+                        {
+                            break;
+                        }
                     }
+
+                    if (salaMejor == null)
+                    {
+                        return BadRequest("No se encontró ninguna sala disponible para las horas solicitadas.");
+                    }
+
                     var existeReserva = await _context.Reservas
-                    .AnyAsync(r => r.SalaId == res.SalaId &&
-                   r.UsuarioId == res.UsuarioId &&
-                   r.HoraInicio == res.HoraInicio &&
-                   r.HoraFin == res.HoraFin);
+                        .AnyAsync(r => r.SalaId == salaMejor.IdSala &&
+                                       r.UsuarioId == res.UsuarioId &&
+                                       r.HoraInicio == res.HoraInicio &&
+                                       r.HoraFin == res.HoraFin);
 
                     if (existeReserva)
                     {
@@ -115,20 +156,19 @@ namespace BE_ProyectoFinal.Controllers
                     }
 
                     Reservas crearReserva = new Reservas(
-                        res.SalaId,
+                        salaMejor.IdSala,
                         res.UsuarioId,
                         res.HoraInicio,
                         res.HoraFin,
-                        res.Prioridad
+                        res.Prioridad,
+                        res.capacidad
                     );
 
                     _context.Reservas.Add(crearReserva);
                 }
 
-                // Guardar todas las nuevas reservas fuera del bucle
                 await _context.SaveChangesAsync();
 
-                // Devuelve la respuesta solo una vez después de haber procesado todas las reservas
                 return Ok(new { message = "Reservas creadas con éxito." });
             }
             catch (Exception ex)
@@ -137,48 +177,80 @@ namespace BE_ProyectoFinal.Controllers
             }
 
 
+
         }
 
 
 
         [HttpPut("actualizar/{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] ReservaDTO reservaActualizada)
+        public async Task<IActionResult> Put(int id, [FromBody] ReservaDTO nuevaReserva)
         {
             try
             {
-
                 var reservaExistente = await _context.Reservas.FirstOrDefaultAsync(r => r.IdReserva == id);
 
-                if (reservaExistente == null) {
-                    return BadRequest(new { message = "No encontro la reserva" });
+                if (reservaExistente == null)
+                {
+                    return BadRequest(new { message = "No se encontró la reserva" });
                 }
 
-                reservaExistente.SalaId = reservaActualizada.SalaId;
-                reservaExistente.UsuarioId = reservaActualizada.UsuarioId;
-                reservaExistente.HoraInicio = reservaActualizada.HoraInicio;
-                reservaExistente.HoraFin = reservaActualizada.HoraFin;
-                reservaExistente.Prioridad = reservaActualizada.Prioridad;
+                var reservasExistentes = await _context.Reservas
+                    .Where(r => r.SalaId == reservaExistente.SalaId &&
+                                r.HoraInicio.Date == nuevaReserva.HoraInicio.Date &&
+                                r.IdReserva != id) // Excluir la reserva actual
+                    .ToListAsync();
+
+                bool salaOcupada = false;
+
+                foreach (var reserva in reservasExistentes)
+                {
+                    bool hayInterseccion = !(nuevaReserva.HoraFin <= reserva.HoraInicio || nuevaReserva.HoraInicio >= reserva.HoraFin);
+
+                    if (hayInterseccion)
+                    {
+                        salaOcupada = true;
+
+                        if (nuevaReserva.Prioridad > reserva.Prioridad)
+                        {
+                            _context.Reservas.Remove(reserva);
+                            await _context.SaveChangesAsync();
+                            salaOcupada = false; 
+                            break;
+                        }
+                    }
+                }
+
+              
+                if (salaOcupada)
+                {
+                    return BadRequest(new { message = "La nueva reserva se superpone con otra reserva de mayor o igual prioridad." });
+                }
+
+                reservaExistente.HoraInicio = nuevaReserva.HoraInicio;
+                reservaExistente.HoraFin = nuevaReserva.HoraFin;
+                reservaExistente.Prioridad = nuevaReserva.Prioridad;
 
                 await _context.SaveChangesAsync();
-                return Ok(new { message = "La reserva fue actualizada" });
 
+                return Ok(new { message = "La reserva fue actualizada con éxito" });
             }
-            catch (Exception ex) {
-
-                return BadRequest(ex.Message);
-
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = $"Error: {ex.Message}" });
             }
         }
 
+
         [HttpDelete("eliminar/{id}")]
-        public async Task<IActionResult> EliminarReserva(int id)
+        public async Task<IActionResult> delete(int id)
         {
             try
             {
                 var reserva = await _context.Reservas.FindAsync(id);
+
                 if (reserva == null)
                 {
-                    return NotFound(new { message = "Reserva no encontrada" });
+                    return NotFound(new { message = "Reserva no encontrada." });
                 }
 
                 _context.Reservas.Remove(reserva);
@@ -187,9 +259,10 @@ namespace BE_ProyectoFinal.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { message = $"Error: {ex.Message}" });
             }
         }
+
 
 
     }

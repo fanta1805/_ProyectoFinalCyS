@@ -4,17 +4,13 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-header">
-          <h4>Nueva Reserva</h4>
+          <h4>{{ accion | uppercase }} RESERVA</h4>
         </div>
         <div class="card-body">
           <form [formGroup]="reservaForm" id="reservaForm">
             <div class="mb-3">
               <label for="usuarioId" class="form-label">ID Usuario</label>
               <input formControlName="UsuarioId" type="number" class="form-control" id="usuarioId" placeholder="Ingrese ID del Usuario" required>
-            </div>
-            <div class="mb-3">
-              <label for="salaId" class="form-label">ID Sala</label>
-              <input formControlName="SalaId" type="number" class="form-control" id="salaId" placeholder="Ingrese ID de la Sala" required>
             </div>
             <div class="mb-3">
               <label for="horaInicio" class="form-label">Hora de Inicio</label>
@@ -33,8 +29,8 @@
               <input formControlName="capacidad" type="number" class="form-control" id="capacidad" placeholder="Ingrese Capacidad" required>
             </div>
             <div class="d-flex justify-content-between">
-              <button type="button" class="btn btn-secondary" (click)="anadirReserva()">Añadir Reserva</button>
-              <button (click)="realizarReserva()" [disabled]="isSending">Enviar Reservas</button>
+              <button type="button" class="btn btn-secondary" (click)="anadirReserva()" [disabled]="accion === 'Editar'">Añadir Reserva</button>
+              <button (click)="guardarReserva()" [disabled]="isSending" >{{ accion === 'Editar' ? 'Confirmar Edición' : 'Enviar Reservas' }}</button>
             </div>
           </form>
         </div>
@@ -60,10 +56,10 @@
 
                 <!-- Botones de Editar y Borrar -->
                 <div class="col-md-1 d-flex justify-content-end">
-                  <button class="btn btn-sm btn-warning me-1" style="width: 30px; height: 30px;">
+                  <button (click)="editarReserva(reserva)" class="btn btn-sm btn-warning me-1" style="width: 30px; height: 30px;">
                     <i class="bi bi-pencil-square"></i>
                   </button>
-                  <button class="btn btn-sm btn-danger" style="width: 30px; height: 30px;">
+                  <button (click) = "eliminarReserva(reserva.idReserva)" class="btn btn-sm btn-danger" style="width: 30px; height: 30px;">
                     <i class="bi bi-trash"></i>
                   </button>
                 </div>

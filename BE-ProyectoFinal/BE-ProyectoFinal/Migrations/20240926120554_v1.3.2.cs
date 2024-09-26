@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BE_ProyectoFinal.Migrations
 {
     /// <inheritdoc />
-    public partial class v103 : Migration
+    public partial class v132 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,8 @@ namespace BE_ProyectoFinal.Migrations
                     IdSala = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NombreSala = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Ubicacion = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Ubicacion = table.Column<int>(type: "int", nullable: false),
+                    capacidad = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -34,7 +35,8 @@ namespace BE_ProyectoFinal.Migrations
                     email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Rol = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    contrasena = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    contrasena = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    piso = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,7 +44,7 @@ namespace BE_ProyectoFinal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Horario",
+                name: "Horarios",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -53,9 +55,9 @@ namespace BE_ProyectoFinal.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Horario", x => x.Id);
+                    table.PrimaryKey("PK_Horarios", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Horario_Salas_SalaId",
+                        name: "FK_Horarios_Salas_SalaId",
                         column: x => x.SalaId,
                         principalTable: "Salas",
                         principalColumn: "IdSala",
@@ -72,7 +74,8 @@ namespace BE_ProyectoFinal.Migrations
                     UsuarioId = table.Column<int>(type: "int", nullable: false),
                     HoraInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
                     HoraFin = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Prioridad = table.Column<int>(type: "int", nullable: false)
+                    Prioridad = table.Column<int>(type: "int", nullable: false),
+                    capacidad = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -92,8 +95,8 @@ namespace BE_ProyectoFinal.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Horario_SalaId",
-                table: "Horario",
+                name: "IX_Horarios_SalaId",
+                table: "Horarios",
                 column: "SalaId");
 
             migrationBuilder.CreateIndex(
@@ -111,7 +114,7 @@ namespace BE_ProyectoFinal.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Horario");
+                name: "Horarios");
 
             migrationBuilder.DropTable(
                 name: "Reservas");

@@ -10,7 +10,8 @@ export class ReservaService {
   private myApiUrl = 'api/reserva/usuario/listaReservas'
   private myApiUrlSalas = 'api/salas/salasDisponibles'
   private myApiUrlReservar = 'api/reserva/usuario/reservar'
-
+  private myApiUrlEliminar = 'api/reserva/usuario/eliminar/'
+  private myApiUrlActualizar = 'api/reserva/usuario/actualizar/'
 
 
 
@@ -27,6 +28,15 @@ export class ReservaService {
 
   postReservar(reservas : any[]): Observable<any>{
     return this.http.post(this.myAppUrl + this.myApiUrlReservar, reservas);
+  }
+
+  deleteReserva(id: number): Observable<any>{
+    return this.http.delete(this.myAppUrl + this.myApiUrlEliminar + id)
+  }
+
+  updateReserva(id: number, reserva: any): Observable<any>{
+    return this.http.put(this.myAppUrl + this.myApiUrlActualizar + id, reserva)
+
   }
 
 

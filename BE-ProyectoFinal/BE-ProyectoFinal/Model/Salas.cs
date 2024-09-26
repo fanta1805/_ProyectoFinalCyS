@@ -11,20 +11,22 @@ namespace BE_ProyectoFinal.Model
         public string NombreSala { get; set; }
 
         [Required]
-        public string Ubicacion { get; set; }
+        public int Ubicacion { get; set; }
 
         public ICollection<Horario> Horarios { get; set; }
         [Required]
         public int capacidad { get; set; }
 
 
-        public Salas(string nombreSala, string ubicacion, int capacidad)
+        public Salas(string nombreSala, int ubicacion, int capacidad)
         {
             this.NombreSala = nombreSala;
             this.Ubicacion = ubicacion;
             this.Horarios = new List<Horario>();
             this.capacidad = capacidad;
         }
+
+        public Salas() { }
     }
 
 }

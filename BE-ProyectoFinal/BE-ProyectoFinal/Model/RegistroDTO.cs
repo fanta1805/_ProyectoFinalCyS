@@ -6,5 +6,6 @@
         public string Name { get; set; }
         public string Rol { get; set; }
         public string contrasena {  get; set; }
+        public int piso { get; set; }
     }
 }

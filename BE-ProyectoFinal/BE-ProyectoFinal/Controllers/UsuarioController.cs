@@ -27,7 +27,8 @@ namespace BE_ProyectoFinal.Controllers
                     registroUser.email,
                     registroUser.Name,
                     registroUser.Rol,
-                    registroUser.contrasena
+                    registroUser.contrasena, 
+                    registroUser.piso
                 );
                 _context.Add(nuevoUsuario);
                 await _context.SaveChangesAsync();
