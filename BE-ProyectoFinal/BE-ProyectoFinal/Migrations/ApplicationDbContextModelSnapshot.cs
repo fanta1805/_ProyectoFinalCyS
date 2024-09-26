@@ -68,6 +68,9 @@ namespace BE_ProyectoFinal.Migrations
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
+                    b.Property<int>("capacidad")
+                        .HasColumnType("int");
+
                     b.HasKey("IdReserva");
 
                     b.HasIndex("SalaId");
@@ -89,9 +92,8 @@ namespace BE_ProyectoFinal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Ubicacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Ubicacion")
+                        .HasColumnType("int");
 
                     b.Property<int>("capacidad")
                         .HasColumnType("int");
@@ -124,6 +126,9 @@ namespace BE_ProyectoFinal.Migrations
                     b.Property<string>("email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("piso")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

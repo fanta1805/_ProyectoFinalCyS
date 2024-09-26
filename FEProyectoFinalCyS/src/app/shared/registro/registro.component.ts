@@ -21,7 +21,8 @@ export class RegistroComponent {
       Name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       contrasena: ['', [Validators.required, Validators.minLength(8)]],
-      Rol: ['', [Validators.required, Validators.pattern('^(ADMIN|USUARIO)$')]]
+      Rol: ['', [Validators.required, Validators.pattern('^(ADMIN|USUARIO)$')]],
+      piso: ['', Validators.required]
     })
   }
 
@@ -31,6 +32,7 @@ export class RegistroComponent {
       email: this.registroForm.get('email')?.value,
       contrasena: this.registroForm.get('contrasena')?.value,
       Rol: this.registroForm.get('Rol')?.value,
+      piso: this.registroForm.get('piso')?.value
     }
 
     this._registro.postRegistrarUsuario(registro).subscribe(data =>{

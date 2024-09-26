@@ -13,7 +13,7 @@
         "IsRequired": true
       },
       {
-        "Name": "reservaActualizada",
+        "Name": "nuevaReserva",
         "Type": "BE_ProyectoFinal.Model.ReservaDTO",
         "IsRequired": true
       }
@@ -22,7 +22,7 @@
   },
   {
     "ContainingType": "BE_ProyectoFinal.Controllers.ReservaController",
-    "Method": "EliminarReserva",
+    "Method": "delete",
     "RelativePath": "api/reserva/usuario/eliminar/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
