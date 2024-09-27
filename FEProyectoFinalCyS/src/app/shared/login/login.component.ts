@@ -36,8 +36,15 @@ export class LoginComponent {
     this._login.postLoginUsuario(login).subscribe(data =>{
       if(data){
         this.toastr.success('Usuario inicio sesion', 'Exito!')
-        this.inicioSesionForm.reset();
-        this.router.navigate(['/home'])
+        if(login.Rol === "ADMIN"){
+          this.router.navigate(['/home-user'])
+          this.inicioSesionForm.reset();
+        }if(login.Rol === "USER"){
+          this.router.navigate(['/home'])
+        }
+
+
+
       }else{
         this.toastr.error('Credenciales incorrectas', 'Error');
       }
