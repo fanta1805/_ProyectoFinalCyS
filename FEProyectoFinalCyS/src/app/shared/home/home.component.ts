@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {ReservaService} from "../../services/reserva.service";
 import {CommonModule} from "@angular/common";
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators
+} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {RouterLink} from "@angular/router";
 import {error} from "@angular/compiler-cli/src/transformers/util";
@@ -30,7 +37,7 @@ export class HomeComponent {
       HoraFin: ['', Validators.required],
       Prioridad: ['', Validators.required],
       capacidad: ['', Validators.required]
-    })
+    }, {validators: this.horaInicioMenorQueHoraFin});
   }
 
   ngOnInit(): void {
@@ -179,4 +186,14 @@ export class HomeComponent {
 
     })
   }
+  horaInicioMenorQueHoraFin(control: AbstractControl):  ValidationErrors | null {
+    const horaInicio = control.get('HoraInicio')?.value;
+    const horaFin = control.get('HoraFin')?.value;
+
+    if (horaInicio && horaFin && new Date(horaInicio) >= new Date(horaFin)) {
+      return { horaInicioMenor: true }; // Retorna un error si HoraInicio no es menor que HoraFin
+    }
+    return null; // Sin errores
+  }
+
 }

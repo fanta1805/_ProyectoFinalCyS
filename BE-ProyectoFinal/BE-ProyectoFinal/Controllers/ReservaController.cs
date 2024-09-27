@@ -32,6 +32,10 @@ namespace BE_ProyectoFinal.Controllers
         }
 
         // POST: ReservaController/Edit/5
+
+
+
+
         [HttpPost("reservar")]
         public async Task<IActionResult> Post([FromBody] List<ReservaDTO> nuevasReserva)
         {
@@ -100,6 +104,12 @@ namespace BE_ProyectoFinal.Controllers
                                 // Si la sala está ocupada, verificar prioridad
                                 if (res.Prioridad > reserva.Prioridad)
                                 {
+                                    // Verificar si la nueva reserva tiene mayor capacidad que la sala ocupada
+                                    if (res.capacidad > capacidadSala)
+                                    {
+                                        return BadRequest("No se puede hacer la reserva debido a la capacidad requerida.");
+                                    }
+
                                     // Si la nueva reserva tiene mayor prioridad, cancelar la existente
                                     _context.Reservas.Remove(reserva);
                                     await _context.SaveChangesAsync();
@@ -146,6 +156,16 @@ namespace BE_ProyectoFinal.Controllers
                                     // Comprobar prioridad
                                     if (res.Prioridad > reserva.Prioridad)
                                     {
+                                        var capacidadSala = await _context.Salas
+                                        .Where(r => r.IdSala == reserva.SalaId)
+                                            .Select(r => r.capacidad)
+                                        .FirstOrDefaultAsync();
+                                        // Verificar si la nueva reserva tiene mayor capacidad que la sala ocupada
+                                        if (res.capacidad > capacidadSala)
+                                        {
+                                            return BadRequest("No se puede hacer la reserva debido a la capacidad requerida.");
+                                        }
+
                                         // Cancelar la reserva y marcar sala como disponible
                                         _context.Reservas.Remove(reserva);
                                         await _context.SaveChangesAsync();
