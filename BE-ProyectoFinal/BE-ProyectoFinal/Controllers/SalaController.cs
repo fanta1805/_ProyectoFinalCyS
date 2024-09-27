@@ -55,30 +55,44 @@ namespace BE_ProyectoFinal.Controllers
         {
             try
             {
-
+                // Buscar la sala por su ID
                 var sala = await _context.Salas.FirstOrDefaultAsync(r => r.IdSala == id);
 
                 if (sala == null)
                 {
-                    return BadRequest(new { message = "No encontro la sala" });
+                    return BadRequest(new { message = "No se encontró la sala" });
                 }
 
+                // Obtener las reservas asociadas a la sala
+                var reservas = await _context.Reservas.Where(r => r.SalaId == id).ToListAsync();
 
+                // Filtrar las reservas cuya capacidad sea mayor que la capacidad de la nueva sala
+                var reservasAEliminar = reservas.Where(r => r.capacidad > salaDTO.capacidad).ToList();
+
+                // Si hay reservas que deben ser eliminadas, eliminarlas
+                foreach (var item in reservasAEliminar)
+                {
+                    _context.Reservas.Remove(item);
+                    await _context.SaveChangesAsync();
+                }
+
+                // Actualizar los campos de la sala
                 sala.NombreSala = salaDTO.NombreSala;
                 sala.Ubicacion = salaDTO.Ubicacion;
                 sala.capacidad = salaDTO.capacidad;
 
+                // Guardar los cambios
                 await _context.SaveChangesAsync();
-                return Ok(new { message = "La sala fue actualizada" });
 
+                return Ok(new { message = "La sala fue actualizada, y las reservas que excedían la nueva capacidad fueron eliminadas" });
             }
             catch (Exception ex)
             {
-
-                return BadRequest(ex.Message);
-
+                return BadRequest(new { message = ex.Message });
             }
         }
+
+
 
         [HttpDelete("eliminar/{id}")]
         public async Task<IActionResult> delete(int id)

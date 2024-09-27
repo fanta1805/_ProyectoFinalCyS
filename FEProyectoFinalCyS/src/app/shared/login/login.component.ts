@@ -42,9 +42,6 @@ export class LoginComponent {
         }if(login.Rol === "USER"){
           this.router.navigate(['/home'])
         }
-
-
-
       }else{
         this.toastr.error('Credenciales incorrectas', 'Error');
       }

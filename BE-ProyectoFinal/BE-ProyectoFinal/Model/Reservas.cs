@@ -20,16 +20,32 @@ namespace BE_ProyectoFinal.Model
         [ForeignKey("UsuarioId")]
         public Usuarios Usuario { get; set; } // Navegación a Usuario
 
-        [Required]
-        public DateTime HoraInicio { get; set; }
+        
+        private DateTime _horaInicio { get; set; }
+
+        
+        private DateTime _horaFin { get; set; }
 
         [Required]
-        public DateTime HoraFin { get; set; }
+        public DateTime HoraInicio
+        {
+            get => _horaInicio;
+            set => _horaInicio = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
+
+        [Required]
+        public DateTime HoraFin
+        {
+            get => _horaFin;
+            set => _horaFin = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
 
         [Required]
         public int Prioridad { get; set; }
         [Required]
         public int capacidad { get; set; }
+
+
 
 
         public Reservas(int salaId, int usuarioId, DateTime horaInicio, DateTime horaFin, int prioridad, int capacidad)
@@ -40,6 +56,8 @@ namespace BE_ProyectoFinal.Model
             this.HoraFin = horaFin;
             this.Prioridad = prioridad;
             this.capacidad = capacidad;
+            
+
 
         }
 

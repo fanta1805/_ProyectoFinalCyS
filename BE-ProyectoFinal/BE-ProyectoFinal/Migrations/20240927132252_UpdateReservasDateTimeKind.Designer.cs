@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BE_ProyectoFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240926120554_v1.3.2")]
-    partial class v132
+    [Migration("20240927132252_UpdateReservasDateTimeKind")]
+    partial class UpdateReservasDateTimeKind
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

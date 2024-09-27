@@ -37,8 +37,10 @@ export class RegistroComponent {
 
     this._registro.postRegistrarUsuario(registro).subscribe(data =>{
 
-        this.toastr.success('Usuario Registrado con exito!', 'Exito!')
-        this.registroForm.reset();
+      this.toastr.success('Usuario Registrado con exito!', 'Exito!')
+      this.registroForm.reset();
+
+
       }, error => {
         this.toastr.error('Opss.. Ha ocurrido un error al registrar al usuario', 'Error!')
         console.log(error);

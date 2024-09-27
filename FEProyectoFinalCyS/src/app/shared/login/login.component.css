@@ -1,0 +1,43 @@
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+}
+
+.card-header {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.form-control {
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004080;
+}
+
+.card-footer a {
+  font-weight: bold;
+}
+
+.card-footer p {
+  margin: 0;
+}
+
+.shadow-lg {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
