@@ -42,55 +42,74 @@ export class HomeComponent {
   isSending = false;
 
   guardarReserva() {
-    if (this.reservaForm.valid) {
-      const reserva: any = {
-        UsuarioId: this.reservaForm.get('UsuarioId')?.value,
-        HoraInicio: new Date(this.reservaForm.get('HoraInicio')?.value).toISOString(),
-        HoraFin: new Date(this.reservaForm.get('HoraFin')?.value).toISOString(),
-        Prioridad: this.reservaForm.get('Prioridad')?.value,
-        capacidad: this.reservaForm.get('capacidad')?.value
-      };
+    // Verificamos si hay al menos una reserva en la lista temporal
+    if (this.reservasTemp.length > 0) {
+      this.isSending = true; // Deshabilitar botón
 
-      if (this.id === undefined) {
-        // Si el id no está definido, creamos una nueva reserva
-        this.reservasTemp.push(reserva);
-        this.isSending = true; // Deshabilitar botón
-        this._reservaService.postReservar(this.reservasTemp).subscribe(
-          (response: any) => {
-            this.toastr.success(response.message, 'Éxito!');
-            this.obtenerReservas();
-            this.reservasTemp = []; // Limpiar lista temporal
-            this.isSending = false; // Habilitar botón
-          },
-          (error: any) => {
-            this.toastr.error('Opss.. Ha ocurrido un error al enviar las reservas', 'Error!');
-            console.log('Error en el envío de reservas: ', error);
-            this.isSending = false; // Habilitar botón
-          }
-        );
-      } else {
-        // Si el id está definido, actualizamos la reserva
-        this.isSending = true; // Deshabilitar botón
-        this._reservaService.updateReserva(this.id, reserva).subscribe(
-          (response: any) => {
-            this.toastr.success('Reserva actualizada con éxito', 'Reserva actualizada');
-            this.obtenerReservas();
-            this.isSending = false; // Habilitar botón
-            this.id = undefined; // Reiniciar el id para futuras acciones
-            this.accion = "Agregar"; // Cambiar la acción de vuelta a 'Agregar'
-            this.reservaForm.reset(); // Reiniciar el formulario
-          },
-          (error: any) => {
-            this.toastr.error('Opss.. Ha ocurrido un error al actualizar la reserva', 'Error!');
-            console.log('Error al actualizar la reserva: ', error);
-            this.isSending = false; // Habilitar botón
-          }
-        );
-      }
+      // Enviar todas las reservas de la lista temporal
+      this._reservaService.postReservar(this.reservasTemp).subscribe(
+        (response: any) => {
+          this.toastr.success(response.message, 'Éxito!');
+          this.obtenerReservas();
+          this.reservasTemp = []; // Limpiar la lista temporal
+          this.isSending = false; // Habilitar botón
+        },
+        (error: any) => {
+          this.toastr.error('Opss.. Ha ocurrido un error al enviar las reservas', 'Error!');
+          console.log('Error en el envío de reservas: ', error);
+          this.reservasTemp = []; // Limpiar la lista temporal
+          this.isSending = false; // Habilitar botón
+        }
+      );
     } else {
-      this.toastr.error('Por favor, complete todos los campos requeridos.', 'Error!');
+      // Si no hay reservas en la lista temporal, validamos el formulario normalmente
+      if (this.reservaForm.valid) {
+        const reserva: any = {
+          UsuarioId: this.reservaForm.get('UsuarioId')?.value,
+          HoraInicio: this.getAdjustedTime(this.reservaForm.get('HoraInicio')?.value),
+          HoraFin: this.getAdjustedTime(this.reservaForm.get('HoraFin')?.value),
+          Prioridad: this.reservaForm.get('Prioridad')?.value,
+          capacidad: this.reservaForm.get('capacidad')?.value
+        };
+
+        if (this.id === undefined) {
+          this.reservasTemp.push(reserva);
+          this.toastr.success('Reserva añadida a la lista temporal', 'Éxito!');
+          this.reservaForm.reset(); // Limpiar el formulario después de agregar
+        } else {
+          // Si el id está definido, actualizamos la reserva
+          this.isSending = true; // Deshabilitar botón
+          this._reservaService.updateReserva(this.id, reserva).subscribe(
+            (response: any) => {
+              this.toastr.success('Reserva actualizada con éxito', 'Reserva actualizada');
+              this.obtenerReservas();
+              this.isSending = false; // Habilitar botón
+              this.id = undefined; // Reiniciar el id para futuras acciones
+              this.accion = "Agregar"; // Cambiar la acción de vuelta a 'Agregar'
+              this.reservaForm.reset(); // Reiniciar el formulario
+              this.reservasTemp = []; // Limpiar la lista temporal
+            },
+            (error: any) => {
+              this.toastr.error('Opss.. Ha ocurrido un error al actualizar la reserva', 'Error!');
+              console.log('Error al actualizar la reserva: ', error);
+              this.isSending = false; // Habilitar botón
+              this.reservasTemp = []; // Limpiar la lista temporal
+            }
+          );
+        }
+      } else {
+        this.toastr.error('Por favor, complete todos los campos requeridos.', 'Error!');
+      }
     }
   }
+
+  getAdjustedTime(dateString: string): string {
+    const date = new Date(dateString);
+    // Restar 3 horas (3 * 60 * 60 * 1000 milisegundos)
+    const adjustedDate = new Date(date.getTime() - (3 * 60 * 60 * 1000));
+    return adjustedDate.toISOString(); // Asegúrate de enviarlo en formato ISO
+  }
+
 
 
 

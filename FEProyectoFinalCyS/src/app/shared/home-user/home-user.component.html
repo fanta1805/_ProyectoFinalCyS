@@ -1,68 +1,54 @@
 <div class="container mt-5">
   <div class="row">
-    <!-- Formulario de Reserva -->
+    <!-- Formulario de Sala -->
     <div class="col-md-4">
       <div class="card">
         <div class="card-header">
-          <h4>Nueva Reserva</h4>
+          <h4> {{ accion | uppercase }} SALA</h4>
         </div>
         <div class="card-body">
-          <form id="reservaForm">
+          <form [formGroup]="salaForm" id="salaForm">
             <div class="mb-3">
-              <label for="usuarioId" class="form-label">ID Usuario</label>
-              <input type="number" class="form-control" id="usuarioId" placeholder="Ingrese ID del Usuario">
+              <label for="nombreSala" class="form-label">Nombre de la Sala</label>
+              <input formControlName="nombreSala" type="text" class="form-control" id="nombreSala" placeholder="Ingrese el nombre de la sala">
             </div>
             <div class="mb-3">
-              <label for="salaId" class="form-label">ID Sala</label>
-              <input type="number" class="form-control" id="salaId" placeholder="Ingrese ID de la Sala">
+              <label for="pisoSala" class="form-label">Piso</label>
+              <input formControlName="Ubicacion" type="number" class="form-control" id="pisoSala" placeholder="Ingrese el piso de la sala">
             </div>
             <div class="mb-3">
-              <label for="horaInicio" class="form-label">Hora de Inicio</label>
-              <input type="datetime-local" class="form-control" id="horaInicio">
+              <label for="capacidadSala" class="form-label">Capacidad</label>
+              <input formControlName="capacidad" type="number" class="form-control" id="capacidadSala" placeholder="Ingrese la capacidad de la sala">
             </div>
-            <div class="mb-3">
-              <label for="horaFin" class="form-label">Hora de Fin</label>
-              <input type="datetime-local" class="form-control" id="horaFin">
-            </div>
-            <div class="mb-3">
-              <label for="prioridad" class="form-label">Prioridad</label>
-              <input type="number" class="form-control" id="prioridad" placeholder="Ingrese Prioridad">
-            </div>
-            <div class="mb-3">
-              <label for="capacidad" class="form-label">Capacidad</label>
-              <input type="number" class="form-control" id="capacidad" placeholder="Ingrese Capacidad">
-            </div>
-            <button type="submit" class="btn btn-primary">Guardar Reserva</button>
+            <button (click)="agregarSala()" [disabled]="isSending" type="submit" class="btn btn-primary">{{ accion === 'Editar' ? 'Confirmar Edición' : 'Crear Sala' }}</button>
           </form>
         </div>
       </div>
     </div>
 
-    <!-- Reservas realizadas -->
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-header">
-          <h4>Reservas Realizadas</h4>
-        </div>
-        <div class="card-body">
-          <ul class="list-group" id="reservasList">
-            <!-- Aquí se mostrarán las reservas realizadas -->
-            <li class="list-group-item">No hay reservas aún.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
     <!-- Salas disponibles -->
-    <div class="col-md-4">
+    <div class="col-md-8">
       <div class="card">
         <div class="card-header">
           <h4>Salas Disponibles</h4>
         </div>
         <div class="card-body">
           <ul class="list-group" id="salasList">
-            <!-- Aquí se mostrarán las salas disponibles -->
-            <li class="list-group-item">No hay salas disponibles.</li>
+            <li *ngFor="let sala of listSalas" class="list-group-item">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex flex-row">
+                  <div class="me-4"><strong>ID Sala:</strong> {{ sala.idSala }}</div>
+                  <div class="me-4"><strong>Nombre Sala:</strong> {{ sala.nombreSala }}</div>
+                  <div class="me-4"><strong>Piso:</strong> {{ sala.ubicacion }}</div>
+                  <div class="me-4"><strong>Capacidad:</strong> {{ sala.capacidad }}</div>
+                </div>
+                <div>
+                  <button (click)="editarSala(sala)" class="btn btn-warning btn-sm me-2">Editar</button>
+                  <button (click)="eliminarSala(sala.idSala)" class="btn btn-danger btn-sm">Eliminar</button>
+                </div>
+              </div>
+            </li>
+            <li *ngIf="listSalas.length === 0" class="list-group-item">No hay salas aún.</li>
           </ul>
         </div>
       </div>

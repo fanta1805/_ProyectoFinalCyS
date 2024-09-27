@@ -37,6 +37,7 @@ namespace BE_ProyectoFinal.Controllers
         public async Task<IActionResult> Post([FromBody] SalaDTO sala)
         {
             try
+
             {
                 Salas salaNueva = new Salas(sala.NombreSala, sala.Ubicacion, sala.capacidad);
                 _context.Add(salaNueva);
@@ -49,27 +50,26 @@ namespace BE_ProyectoFinal.Controllers
             }
         }
 
-        [HttpPut("actualizar")]
-        public async Task<IActionResult> Put(int id, [FromBody] ReservaDTO reservaActualizada)
+        [HttpPut("actualizar/{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] SalaDTO salaDTO)
         {
             try
             {
 
-                var reservaExistente = await _context.Reservas.FirstOrDefaultAsync(r => r.IdReserva == id);
+                var sala = await _context.Salas.FirstOrDefaultAsync(r => r.IdSala == id);
 
-                if (reservaExistente == null)
+                if (sala == null)
                 {
-                    return BadRequest(new { message = "No encontro la reserva" });
+                    return BadRequest(new { message = "No encontro la sala" });
                 }
 
 
-                reservaExistente.UsuarioId = reservaActualizada.UsuarioId;
-                reservaExistente.HoraInicio = reservaActualizada.HoraInicio;
-                reservaExistente.HoraFin = reservaActualizada.HoraFin;
-                reservaExistente.Prioridad = reservaActualizada.Prioridad;
+                sala.NombreSala = salaDTO.NombreSala;
+                sala.Ubicacion = salaDTO.Ubicacion;
+                sala.capacidad = salaDTO.capacidad;
 
                 await _context.SaveChangesAsync();
-                return Ok(new { message = "La reserva fue actualizada" });
+                return Ok(new { message = "La sala fue actualizada" });
 
             }
             catch (Exception ex)
@@ -77,6 +77,41 @@ namespace BE_ProyectoFinal.Controllers
 
                 return BadRequest(ex.Message);
 
+            }
+        }
+
+        [HttpDelete("eliminar/{id}")]
+        public async Task<IActionResult> delete(int id)
+        {
+            try
+            {
+                var sala = await _context.Salas.FindAsync(id);
+
+                if (sala == null)
+                {
+                    return NotFound(new { message = "Sala no encontrada." });
+                }
+
+                var reservasExistentes = await _context.Reservas
+                .Where(r => r.SalaId == id)
+                .ToListAsync();
+
+                foreach (var item in reservasExistentes)
+                {
+                    _context.Reservas.Remove(item);
+                    await _context.SaveChangesAsync();
+
+
+                }
+
+                _context.Salas.Remove(sala);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Sala eliminada" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = $"Error: {ex.Message}" });
             }
         }
 

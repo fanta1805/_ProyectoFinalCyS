@@ -38,6 +38,8 @@ namespace BE_ProyectoFinal.Controllers
             try
             {
                 bool flag = false;
+
+                // Comprobar si hay intersecciones de reservas en la lista
                 foreach (var resAgregado in nuevasReserva)
                 {
                     foreach (var item in nuevasReserva)
@@ -75,33 +77,15 @@ namespace BE_ProyectoFinal.Controllers
                             .Select(r => r.capacidad)
                             .FirstOrDefaultAsync();
 
-                        var piso = await _context.Salas
-                            .Where(r => r.IdSala == item.IdSala)
-                            .Select(r => r.Ubicacion)
-                            .FirstOrDefaultAsync();
-
+                        // Verificar si la sala tiene la capacidad necesaria
                         if (res.capacidad > capacidadSala)
                         {
-                            continue;
+                            continue; // Si la sala no tiene capacidad suficiente, saltar a la siguiente
                         }
 
-                        if (salaMejor == null)
-                        {
-                            salaMejor = item;
-                        }
-                        else
-                        {
-                            if ((salaMejor.capacidad - res.capacidad) > (item.capacidad - res.capacidad))
-                            {
-                                if ((salaMejor.Ubicacion - usuario.piso) > (item.Ubicacion - usuario.piso))
-                                {
-                                    salaMejor = item;
-                                }
-                            }
-                        }
-
+                        // Verificar reservas existentes en la sala
                         var reservasExistentes = await _context.Reservas
-                            .Where(r => r.SalaId == salaMejor.IdSala &&
+                            .Where(r => r.SalaId == item.IdSala &&
                                         r.HoraInicio.Date == res.HoraInicio.Date)
                             .ToListAsync();
 
@@ -113,29 +97,68 @@ namespace BE_ProyectoFinal.Controllers
 
                             if (hayInterseccion)
                             {
-                                salaOcupada = true;
-
+                                // Si la sala está ocupada, verificar prioridad
                                 if (res.Prioridad > reserva.Prioridad)
                                 {
-                  
+                                    // Si la nueva reserva tiene mayor prioridad, cancelar la existente
                                     _context.Reservas.Remove(reserva);
                                     await _context.SaveChangesAsync();
-                                    salaOcupada = false; 
-                                    break;
+                                    salaOcupada = false; // La sala queda disponible
+                                    break; // Salimos del bucle ya que la sala fue liberada
                                 }
-
+                                else
+                                {
+                                    // Si la nueva reserva tiene menor prioridad, marcar sala como ocupada
+                                    salaOcupada = true;
+                                    break; // No se puede usar esta sala
+                                }
                             }
                         }
 
-                        if (salaOcupada)
-                        {
-                            salaMejor = null;  
-                            continue;
-                        }
-
+                        // Si la sala no está ocupada, seleccionarla
                         if (!salaOcupada)
                         {
-                            break;
+                            // Si esta es la primera sala seleccionada o es más cercana
+                            if (salaMejor == null ||
+                                (Math.Abs(salaMejor.Ubicacion - usuario.piso) > Math.Abs(item.Ubicacion - usuario.piso)))
+                            {
+                                salaMejor = item; // Asignar salaMejor a esta sala
+                            }
+                        }
+                    }
+
+                    // Si no se encontró sala mejor, pero hay salas disponibles, se intenta la siguiente reserva
+                    if (salaMejor == null)
+                    {
+                        // En este punto, intenta ver si hay alguna sala que podría ser liberada
+                        foreach (var item in salas)
+                        {
+                            var reservasExistentes = await _context.Reservas
+                                .Where(r => r.SalaId == item.IdSala &&
+                                            r.HoraInicio.Date == res.HoraInicio.Date)
+                                .ToListAsync();
+
+                            foreach (var reserva in reservasExistentes)
+                            {
+                                // Si se encuentra una reserva ocupando la sala
+                                if (reserva.HoraInicio < res.HoraFin && res.HoraInicio < reserva.HoraFin)
+                                {
+                                    // Comprobar prioridad
+                                    if (res.Prioridad > reserva.Prioridad)
+                                    {
+                                        // Cancelar la reserva y marcar sala como disponible
+                                        _context.Reservas.Remove(reserva);
+                                        await _context.SaveChangesAsync();
+                                        salaMejor = item; // Asignar sala que ahora está disponible
+                                        break; // Salimos del bucle
+                                    }
+                                }
+                            }
+
+                            if (salaMejor != null)
+                            {
+                                break; // Salimos si encontramos una sala
+                            }
                         }
                     }
 
@@ -144,6 +167,7 @@ namespace BE_ProyectoFinal.Controllers
                         return BadRequest("No se encontró ninguna sala disponible para las horas solicitadas.");
                     }
 
+                    // Verificar si ya existe una reserva igual
                     var existeReserva = await _context.Reservas
                         .AnyAsync(r => r.SalaId == salaMejor.IdSala &&
                                        r.UsuarioId == res.UsuarioId &&
@@ -175,10 +199,9 @@ namespace BE_ProyectoFinal.Controllers
             {
                 return BadRequest(new { message = $"Error: {ex.Message}" });
             }
-
-
-
         }
+
+
 
 
 
@@ -189,7 +212,7 @@ namespace BE_ProyectoFinal.Controllers
             {
                 var reservaExistente = await _context.Reservas.FirstOrDefaultAsync(r => r.IdReserva == id);
 
-                if (reservaExistente == null)
+                if (reservaExistente == null) 
                 {
                     return BadRequest(new { message = "No se encontró la reserva" });
                 }
